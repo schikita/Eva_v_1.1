@@ -1,9 +1,9 @@
-import pygame
-import sys
-from video import Video
-from player import Player
-from spear import Spear
-from boss import Boss
+import pygame                              #
+import sys                                 #
+from video import Video                    #
+from player import Player                  # Подключение модулей и директорий к проекту игры
+from spear import Spear                    #
+from boss import Boss                      #
 from boss_2 import BossTwo
 from boss_3 import BossThree
 from fireball import Fireball
@@ -85,6 +85,17 @@ menu_background_image = pygame.image.load('Start-game-1.png')
 pygame.mixer.music.load('04-Cruel-Angel_s-Thesis.ogg')
 pygame.mixer.music.play(-1)
 
+start_image = pygame.image.load('first_image.png')
+image_rect = start_image.get_rect(center=(screen_width // 2, screen_height // 2))
+fade_duration = 5000  # Продолжительность затемнения в миллисекундах
+alpha_level = 255  # Начальный уровень альфа-канала
+
+screen.blit(start_image, image_rect)
+pygame.display.flip()
+
+# Время начала показа
+start_time = pygame.time.get_ticks()
+
 # Цвета
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -120,6 +131,10 @@ level_1_completed = False
 level_2_completed = False
 level_3_completed = False
 
+
+screen.blit(start_image, image_rect)
+pygame.display.flip()
+pygame.time.wait(5000)
 
 def toggle_music():
     global music_muted
