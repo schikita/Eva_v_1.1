@@ -145,7 +145,7 @@ def toggle_music(): # переключение музыки
         pygame.mixer.music.unpause()
 
 
-def load_level(level): # загрузка игры
+def load_level(level): # загрузка уровня игры
     global current_background, current_music, in_game, boss, boss_two, boss_three
     current_background = pygame.image.load(backgrounds[level])
     current_music = music_files[level]
@@ -171,14 +171,14 @@ def load_level(level): # загрузка игры
         boss_two_image_sheet = pygame.image.load('Boss-2.png').convert_alpha()  # Убедитесь, что у вас есть 'Boss-2.png'
         boss_two_position = (screen_width - 300, screen_height - 260)
         boss_two = BossTwo(screen, boss_two_image_sheet, boss_two_position, all_sprites, fireballs)
-        all_sprites.add(boss_two)
+        all_sprites.add(boss_two) #инициализация второго босса
     elif level == "Level 3":
         boss_three_image_sheet = pygame.image.load(
             'Boss-3.png').convert_alpha()  # Убедитесь, что у вас есть 'Boss-2.png'
         boss_three_position = (screen_width - 300, screen_height - 260)
         boss_three = BossThree(screen, boss_three_image_sheet, boss_three_position, all_sprites, fireballs)
 
-        all_sprites.add(boss_three)
+        all_sprites.add(boss_three) #инициализация третьего босса
 
     else:
         # Удаляем босса из всех групп спрайтов, если это не первый уровень
@@ -189,16 +189,16 @@ def load_level(level): # загрузка игры
 
 
 def draw_level():
-    screen.blit(current_background, (0, 0))
+    screen.blit(current_background, (0, 0)) # вывод на экран
 
 
-def process_menu_selection(option):
-    global current_screen, in_game, running
-    if option in ["Level 1", "Level 2", "Level 3"]:
-        load_level(option)
-        current_screen = option
-        in_game = True
-    elif option == "Intro":
+def process_menu_selection(option): # выбор меню
+    global current_screen, in_game, running 
+    if option in ["Level 1", "Level 2", "Level 3"]: # логика загрузки уровней игры
+        load_level(option) #загрузка уровня
+        current_screen = option # вывод на экран
+        in_game = True # начало игры
+    elif option == "Intro": 
         intro_video.restart()
         intro_video.set_volume(1)
         intro()
