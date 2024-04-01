@@ -1,15 +1,15 @@
-import pygame                              #
-import sys                                 #
-from video import Video                    #
+import pygame                              # Подключение модулей и директорий к проекту игры
+import sys                                 # Подключение модулей и директорий к проекту игры
+from video import Video                    # Подключение модулей и директорий к проекту игры
 from player import Player                  # Подключение модулей и директорий к проекту игры
-from spear import Spear                    #
-from boss import Boss                      #
-from boss_2 import BossTwo
-from boss_3 import BossThree
-from fireball import Fireball
-import random
-from meteo import Meteo
-from Car import Car
+from spear import Spear                    # Подключение модулей и директорий к проекту игры
+from boss import Boss                      # Подключение модулей и директорий к проекту игры
+from boss_2 import BossTwo                 # Подключение модулей и директорий к проекту игры
+from boss_3 import BossThree               # Подключение модулей и директорий к проекту игры
+from fireball import Fireball              # Подключение модулей и директорий к проекту игры
+import random                              # Подключение модулей и директорий к проекту игры
+from meteo import Meteo                    # Подключение модулей и директорий к проекту игры
+from Car import Car                        # Подключение модулей и директорий к проекту игры
 
 # Инициализация Pygame
 pygame.init()
@@ -35,14 +35,14 @@ intro_video.set_size((1000, 800))
 
 def intro():
     pygame.mixer.music.stop()  # Останавливаем музыку перед началом интро
-    intro_video.set_volume(1)
+    intro_video.set_volume(1)  # добавляем громкость  для видео
     intro_video.restart()  # Перезапуск видео с начала
     intro_video.resume()  # Возобновляем воспроизведение видео, на случай если оно было остановлено
 
     while intro_video.active:  # Пока видео активно
         intro_video.draw(screen, (0, 0))  # Отрисовка кадра видео
         pygame.display.update()  # Обновление экрана для отображения кадра
-        for event in pygame.event.get():
+        for event in pygame.event.get(): #обработка событий 
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
