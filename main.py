@@ -43,11 +43,11 @@ def intro():
         intro_video.draw(screen, (0, 0))  # Отрисовка кадра видео
         pygame.display.update()  # Обновление экрана для отображения кадра
         for event in pygame.event.get(): #обработка событий 
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
+            if event.type == pygame.QUIT: # при нажатии QUIT,
+                pygame.quit() # пользователь выходит из игры
+                sys.exit() # программа закрывается
+            elif event.type == pygame.KEYDOWN: # формирование события нажатия клавиши
+                if event.key == pygame.K_ESCAPE: #модуль работы с клавиатурой: когда пользователь нажимает ESCAPE
                     intro_video.close()  # Закрываем видео
                     return  # Выход из функции, возвращение в главное меню
         pygame.time.wait(int(intro_video.frame_delay * 1000))  # Задержка для синхронизации с частотой кадров
