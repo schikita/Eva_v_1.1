@@ -15,7 +15,7 @@ from Car import Car                        # Подключение модуле
 pygame.init()
 
 # Основные настройки экрана
-screen_width, screen_height = 1000, 800
+screen_width, screen_height = 1000, 800 
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Evangelion")
 
@@ -132,12 +132,12 @@ level_2_completed = False
 level_3_completed = False
 
 
-screen.blit(start_image, image_rect)
-pygame.display.flip()
-pygame.time.wait(5000)
+screen.blit(start_image, image_rect) # вывод на экран
+pygame.display.flip() #обновляет содержимое основного окна игры
+pygame.time.wait(5000) #  время ожидания 
 
-def toggle_music():
-    global music_muted
+def toggle_music(): # переключение музыки
+    global music_muted # логика включения паузы
     music_muted = not music_muted
     if music_muted:
         pygame.mixer.music.pause()
@@ -145,7 +145,7 @@ def toggle_music():
         pygame.mixer.music.unpause()
 
 
-def load_level(level):
+def load_level(level): # загрузка игры
     global current_background, current_music, in_game, boss, boss_two, boss_three
     current_background = pygame.image.load(backgrounds[level])
     current_music = music_files[level]
