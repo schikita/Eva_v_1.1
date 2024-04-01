@@ -55,14 +55,14 @@ def intro():
     # pygame.mixer.music.play(-1)  # Воспроизведение музыки снова после окончания видео
 
 
-all_sprites.add(player)
+all_sprites.add(player) #добавление спрайта
 
-fireballs = pygame.sprite.Group()
+fireballs = pygame.sprite.Group() # инициализация группы спрайтов
 
-meteo_image = pygame.image.load('meteo.png').convert_alpha()
-meteos = pygame.sprite.Group()
+meteo_image = pygame.image.load('meteo.png').convert_alpha() # добавление рисунка
+meteos = pygame.sprite.Group() # инициализация группы спрайтов
 
-cars = pygame.sprite.Group()
+cars = pygame.sprite.Group() # инициализация группы спрайтов
 
 # Загрузка спрайтового листа босса
 boss_image_sheet = pygame.image.load('Boss-1.png').convert_alpha()
@@ -90,8 +90,8 @@ image_rect = start_image.get_rect(center=(screen_width // 2, screen_height // 2)
 fade_duration = 5000  # Продолжительность затемнения в миллисекундах
 alpha_level = 255  # Начальный уровень альфа-канала
 
-screen.blit(start_image, image_rect)
-pygame.display.flip()
+screen.blit(start_image, image_rect) # вывод на экран 
+pygame.display.flip() #обновляет содержимое основного окна игры
 
 # Время начала показа
 start_time = pygame.time.get_ticks()
