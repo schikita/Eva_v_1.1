@@ -15,13 +15,13 @@ from Car import Car                        # Подключение модуле
 pygame.init()
 
 # Основные настройки экрана
-screen_width, screen_height = 1000, 800 
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Evangelion")
+screen_width, screen_height = 1000, 800 # высота экрана
+screen = pygame.display.set_mode((screen_width, screen_height)) # установка ширины, высоты экрана
+pygame.display.set_caption("Evangelion") # вывод заголовка
 
 # Инициализация групп спрайтов
 all_sprites = pygame.sprite.Group()
-spears = pygame.sprite.Group()
+spears = pygame.sprite.Group() # включение копъя в группу спрайтов
 
 # Загрузка изображения листа спрайтов и создание игрока
 player_image_sheet = pygame.image.load('Sprite-player-1.png')
@@ -77,15 +77,15 @@ boss_three = BossTwo(screen, boss_image_sheet, boss_position, all_sprites, fireb
 all_sprites.add(boss)
 
 # Иконка игры
-programIcon = pygame.image.load('Icon-1.png')
-pygame.display.set_icon(programIcon)
+programIcon = pygame.image.load('Icon-1.png') # загрузка изображения иконки игры
+pygame.display.set_icon(programIcon) # установка иконки 
 
 # Фон и музыка для первоначального меню
-menu_background_image = pygame.image.load('Start-game-1.png')
-pygame.mixer.music.load('04-Cruel-Angel_s-Thesis.ogg')
-pygame.mixer.music.play(-1)
+menu_background_image = pygame.image.load('Start-game-1.png') # загрузка изображения 
+pygame.mixer.music.load('04-Cruel-Angel_s-Thesis.ogg') # загрузка музыки
+pygame.mixer.music.play(-1) # уровень воспроизведения
 
-start_image = pygame.image.load('first_image.png')
+start_image = pygame.image.load('first_image.png') # начало загрузки картинки
 image_rect = start_image.get_rect(center=(screen_width // 2, screen_height // 2))
 fade_duration = 5000  # Продолжительность затемнения в миллисекундах
 alpha_level = 255  # Начальный уровень альфа-канала
@@ -102,15 +102,15 @@ BLACK = (0, 0, 0)
 
 # Шрифты
 pygame.font.init()  # Необходимо для работы с шрифтами в pygame
-font = pygame.font.Font(None, 36)
+font = pygame.font.Font(None, 36) # установка шрифта
 
 # Переменные состояния игры
-current_screen = "menu"
-selected_option = 0
-pause_selected_option = 0
+current_screen = "menu" # меню
+selected_option = 0 # выбор пункта меню
+pause_selected_option = 0 
 in_game = False
-pause_options = ["Continue", "Mute", "Exit"]
-menu_options = ["Level 1", "Level 2", "Level 3", "Intro", "Mute", "Exit"]
+pause_options = ["Continue", "Mute", "Exit"] # опции паузы -  "продолжить", "отключить звук", "Выход"
+menu_options = ["Level 1", "Level 2", "Level 3", "Intro", "Mute", "Exit"] # опции меню - "Уровень 1", "Уровень 2", "Уровень 3", "Введение", "Выключить звук", "Выход"
 music_muted = False
 
 # Фоновые изображения и музыка для каждого уровня
@@ -119,13 +119,13 @@ backgrounds = {
     "Level 2": "BG_levels_2.png",
     "Level 3": "BG-level-3.png",
 }
-music_files = {
+music_files = {                         # файлы музыки
     "Level 1": "08-Angel-Attack.ogg",
     "Level 2": "12-EVA-00.ogg",
     "Level 3": "23-The-Beast.ogg",
 }
-current_background = None
-current_music = None
+current_background = None   #  текущее состояние 
+current_music = None        #  текущая музыка
 
 level_1_completed = False
 level_2_completed = False
@@ -210,23 +210,23 @@ def process_menu_selection(option): # выбор меню
         sys.exit()
 
 
-def process_pause_selection(option):
+def process_pause_selection(option):  # выбор пунка паузы
     global current_screen, in_game, running
-    if option == "Continue":
-        current_screen = "game"
-        in_game = True
-    elif option == "Mute":
+    if option == "Continue":  #  если выбрали пунк "Продолжить"
+        current_screen = "game"  # включается окно игры
+        in_game = True  # игра продолжается
+    elif option == "Mute":  # если выбрали опцию "выключить звук"
         toggle_music()
-    elif option == "Exit":
-        current_screen = "menu"
+    elif option == "Exit":  # если выбрали опцию "выход"
+        current_screen = "menu"  # выход в меню
         in_game = False
-        pygame.mixer.music.stop()
-        pygame.mixer.music.load('04-Cruel-Angel_s-Thesis.ogg')
-        pygame.mixer.music.play(-1)
+        pygame.mixer.music.stop()  # музыка останавливается
+        pygame.mixer.music.load('04-Cruel-Angel_s-Thesis.ogg')  # загрузка аудиофайла
+        pygame.mixer.music.play(-1)  # игрвет музыка
 
 
-def draw_menu(options, selected):
-    screen.blit(menu_background_image, (0, 0))
+def draw_menu(options, selected):  # выбор меню
+    screen.blit(menu_background_image, (0, 0)) 
     menu_x = screen_width * 3 / 4
     for i, option in enumerate(options):
         if i == 0 and level_1_completed:  # Если это первый уровень и он завершен
@@ -243,7 +243,7 @@ def main(font):
     running = True
     level_complete = False  # Флаг завершения уровня
 
-    while running:
+    while running:  # процесс игры
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
