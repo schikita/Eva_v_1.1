@@ -139,37 +139,37 @@ pygame.time.wait(5000) #  время ожидания
 def toggle_music(): # переключение музыки
     global music_muted # логика включения паузы
     music_muted = not music_muted
-    if music_muted:
-        pygame.mixer.music.pause()
+    if music_muted: # выполнение условия: если музыка отключена
+        pygame.mixer.music.pause() # музыка на паузе
     else:
-        pygame.mixer.music.unpause()
+        pygame.mixer.music.unpause() # иначе снять с паузы музыку
 
 
 def load_level(level): # загрузка уровня игры
     global current_background, current_music, in_game, boss, boss_two, boss_three
     current_background = pygame.image.load(backgrounds[level])
-    current_music = music_files[level]
-    pygame.mixer.music.load(current_music)
-    pygame.mixer.music.play(-1)
+    current_music = music_files[level] # 
+    pygame.mixer.music.load(current_music) # загрузка музыки
+    pygame.mixer.music.play(-1) # проигрывание музыки
     in_game = True
 
     # Сброс предыдущего состояния уровня
-    if boss:
-        boss.kill()
-        boss = None
+    if boss: #  если босс 
+        boss.kill() # убит
+        boss = None # нет босса
     if boss_two:  # Добавлено условие для второго босса
-        boss_two.kill()
-        boss_two = None
-    if boss_three:
-        boss_three.kill()
-        boss_three = None
+        boss_two.kill() # босс два убит
+        boss_two = None # нет второго босса
+    if boss_three: # если босс три ( условие)
+        boss_three.kill() # третий босс убит
+        boss_three = None # нет третьего босса 
 
-    if level == "Level 1":
+    if level == "Level 1": # условие для первого уровня
         boss = Boss(screen, boss_image_sheet, boss_position, all_sprites, fireballs)
-        all_sprites.add(boss)
-    elif level == "Level 2":
-        boss_two_image_sheet = pygame.image.load('Boss-2.png').convert_alpha()  # Убедитесь, что у вас есть 'Boss-2.png'
-        boss_two_position = (screen_width - 300, screen_height - 260)
+        all_sprites.add(boss) # добавление босса 
+    elif level == "Level 2": # условие для второго уровня
+        boss_two_image_sheet = pygame.image.load('Boss-2.png').convert_alpha()  # Убедитесь, что у вас есть 'Boss-2.png' # добавление изображения босса 
+        boss_two_position = (screen_width - 300, screen_height - 260) # указываем размеры для позиции второго босса 
         boss_two = BossTwo(screen, boss_two_image_sheet, boss_two_position, all_sprites, fireballs)
         all_sprites.add(boss_two) #инициализация второго босса
     elif level == "Level 3":
