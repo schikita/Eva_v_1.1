@@ -160,7 +160,7 @@ def load_level(level): # загрузка уровня игры
     if boss_two:  # Добавлено условие для второго босса
         boss_two.kill() # босс два убит
         boss_two = None # нет второго босса
-    if boss_three: # если босс три ( условие)
+    if boss_three: # условие для третьего босса
         boss_three.kill() # третий босс убит
         boss_three = None # нет третьего босса 
 
@@ -183,7 +183,7 @@ def load_level(level): # загрузка уровня игры
     else:
         # Удаляем босса из всех групп спрайтов, если это не первый уровень
         if boss:
-            boss.kill()
+            boss.kill() 
             boss = None  # Сброс boss в None после удаления
             boss_two = None
 
@@ -202,12 +202,12 @@ def process_menu_selection(option): # выбор меню
         intro_video.restart()
         intro_video.set_volume(1)
         intro()
-    elif option == "Mute":
+    elif option == "Mute":# звук выключен 
         toggle_music()
-    elif option == "Exit":
-        running = False
-        pygame.quit()
-        sys.exit()
+    elif option == "Exit": # выход из игры
+        running = False # игра окончена
+        pygame.quit() # выход из игры 
+        sys.exit() # закрытие приложения
 
 
 def process_pause_selection(option):  # выбор пунка паузы
