@@ -436,8 +436,8 @@ def main(font):
 
         pygame.display.flip()
 
-    pygame.quit()
-    sys.exit()
+    pygame.quit() # выход из игры
+    sys.exit() # выход из приложения
 
 
 if __name__ == "__main__":
