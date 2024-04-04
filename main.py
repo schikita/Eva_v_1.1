@@ -203,7 +203,7 @@ def process_menu_selection(option): # выбор меню
         intro_video.set_volume(1)
         intro()
     elif option == "Mute":# звук выключен 
-        toggle_music()
+        toggle_music() # 
     elif option == "Exit": # выход из игры
         running = False # игра окончена
         pygame.quit() # выход из игры 
@@ -237,28 +237,28 @@ def draw_menu(options, selected):  # выбор меню
         screen.blit(text, (menu_x - text.get_width() / 2, 150 + 50 * i))
 
 
-def main(font):
+def main(font): # основная функция
     global current_screen, selected_option, pause_selected_option, in_game, music_muted, boss
 
-    running = True
+    running = True # игра продолжается
     level_complete = False  # Флаг завершения уровня
 
     while running:  # процесс игры
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE and in_game:
-                    current_screen = "pause"
-                    continue
+        for event in pygame.event.get(): # начало события 
+            if event.type == pygame.QUIT: #  если выполняется выход 
+                running = False # процесс прекращается
+            elif event.type == pygame.KEYDOWN: # нажимаешь клавишу вниз
+                if event.key == pygame.K_ESCAPE and in_game: # при нажатии на escape во время игры 
+                    current_screen = "pause" # 
+                    continue #
 
-                if current_screen == "menu":
-                    if event.key == pygame.K_DOWN:
-                        selected_option = (selected_option + 1) % len(menu_options)
-                    elif event.key == pygame.K_UP:
-                        selected_option = (selected_option - 1) % len(menu_options)
-                    elif event.key == pygame.K_RETURN:
-                        process_menu_selection(menu_options[selected_option])
+                if current_screen == "menu":  # текущее положение меню
+                    if event.key == pygame.K_DOWN:  # нажимаешь на клавишу вниз
+                        selected_option = (selected_option + 1) % len(menu_options) # 
+                    elif event.key == pygame.K_UP: #
+                        selected_option = (selected_option - 1) % len(menu_options) #
+                    elif event.key == pygame.K_RETURN: #
+                        process_menu_selection(menu_options[selected_option]) #
 
                 elif current_screen == "pause":
                     if event.key == pygame.K_DOWN:
