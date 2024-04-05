@@ -203,7 +203,7 @@ def process_menu_selection(option): # выбор меню
         intro_video.set_volume(1)
         intro()
     elif option == "Mute":# звук выключен 
-        toggle_music() # 
+        toggle_music() # тумблер вкл .выкл музыки
     elif option == "Exit": # выход из игры
         running = False # игра окончена
         pygame.quit() # выход из игры 
@@ -216,7 +216,7 @@ def process_pause_selection(option):  # выбор пунка паузы
         current_screen = "game"  # включается окно игры
         in_game = True  # игра продолжается
     elif option == "Mute":  # если выбрали опцию "выключить звук"
-        toggle_music()
+        toggle_music()  # тумблер вкл .выкл музыки
     elif option == "Exit":  # если выбрали опцию "выход"
         current_screen = "menu"  # выход в меню
         in_game = False
@@ -334,34 +334,34 @@ def main(font): # основная функция
                     meteos.add(new_meteo)
                     all_sprites.add(new_meteo)
 
-                hits = pygame.sprite.spritecollide(boss_three, spears, True)
-                for hit in hits:
-                    boss_three.hit()
-                    if boss_two.health <= 0:
-                        level_complete = True
-                        display_time = pygame.time.get_ticks()
-                        boss_three.kill()
+                hits = pygame.sprite.spritecollide(boss_three, spears, True)  # столкновение босса с копьем
+                for hit in hits:  # если в босса попадает копье
+                    boss_three.hit()  # удар по третьему боссу 
+                    if boss_two.health <= 0:  # если у босса закончились жизни
+                        level_complete = True  # уровень пройден 
+                        display_time = pygame.time.get_ticks()  # показано время 
+                        boss_three.kill()  # босс 3 убит
 
                 boss_three_health_text = font.render(f"Boss 3 Health: {boss_three.health}", True, (255, 255, 255))
                 screen.blit(boss_three_health_text, (10, 60))
 
-            fireballs.update()
+            fireballs.update()  # обновление шариков
 
             # Обновляем спрайты, исключая игрока, если в группе all_sprites есть и другие спрайты
-            for sprite in all_sprites:
-                if sprite != player:
-                    sprite.update()
+            for sprite in all_sprites:  # условия для  всех спрайтов
+                if sprite != player:  # исключаем игрока 
+                    sprite.update()  # обновление спрайтов
 
-            spears.update()
+            spears.update()  # обновление для копья
 
-            all_sprites.draw(screen)
-            spears.draw(screen)
-            fireballs.draw(screen)
+            all_sprites.draw(screen)  # загрузка спрайтов
+            spears.draw(screen)  # загрузка копья
+            fireballs.draw(screen)  # загрузка шариков
 
             # Проверка столкновений между игроком и шариками
-            hits = pygame.sprite.spritecollide(player, fireballs, True)
-            for hit in hits:
-                player.take_damage()
+            hits = pygame.sprite.spritecollide(player, fireballs, True)  # игрок сталкивается с шариками
+            for hit in hits:  # условие при столкновении
+                player.take_damage()  # игроку нанесен удар
                 if player.health <= 0:
                     # Если жизни игрока закончились, показываем сообщение "You lose"
                     screen.fill((0, 0, 0))  # Очищаем экран
@@ -371,16 +371,16 @@ def main(font): # основная функция
                     screen.blit(lose_text, text_rect)
                     pygame.display.flip()
                     pygame.time.wait(2000)  # Даем время увидеть сообщение
-                    current_screen = "menu"
-                    in_game = False
+                    current_screen = "menu"  # выход в меню
+                    in_game = False  # игра остановлена
                     break  # Выход из цикла, чтобы не обрабатывать другие столкновения после смерти
 
             # Проверяем столкновения метеоритов с игроком
-            hits = pygame.sprite.spritecollide(player, meteos, True)
-            for hit in hits:
-                player.take_damage()
+            hits = pygame.sprite.spritecollide(player, meteos, True)  # столкновения игрока с метеоритом
+            for hit in hits:  # условия при ранении игрока 
+                player.take_damage()  # игроку нанесен удар
                 # Проверяем, остались ли у игрока жизни после попадания
-                if player.health <= 0:
+                if player.health <= 0:  # условия жизнией для игрока 
                     # Если жизни игрока закончились, показываем сообщение "You lose"
                     screen.fill((0, 0, 0))  # Очищаем экран
                     font = pygame.font.Font(None, 74)
@@ -389,14 +389,14 @@ def main(font): # основная функция
                     screen.blit(lose_text, text_rect)
                     pygame.display.flip()
                     pygame.time.wait(2000)  # Даем время увидеть сообщение
-                    current_screen = "menu"
-                    in_game = False
+                    current_screen = "menu"  # отображение меню 
+                    in_game = False  # игра остановлена
                     break  # Выход из цикла, чтобы не обрабатывать другие столкновения после смерти
 
             # Позже, в игровом цикле, проверка столкновений могла бы выглядеть так:
             hits = pygame.sprite.spritecollide(player, cars, True)
-            for hit in hits:
-                player.take_damage()
+            for hit in hits:  # условие при ранении игрока 
+                player.take_damage()  # игрок ранен
                 if player.health <= 0:
                     # Если жизни игрока закончились, показываем сообщение "You lose"
                     screen.fill((0, 0, 0))  # Очищаем экран
@@ -406,17 +406,17 @@ def main(font): # основная функция
                     screen.blit(lose_text, text_rect)
                     pygame.display.flip()
                     pygame.time.wait(2000)  # Даем время увидеть сообщение
-                    current_screen = "menu"
-                    in_game = False
+                    current_screen = "menu"  # меню
+                    in_game = False  # игра остановлена
                     break  # Выход из цикла, чтобы не обрабатывать другие столкновения после смерти
 
             # Проверка столкновений
             if boss is not None and boss.alive():  # Добавлена проверка на существование объекта boss
                 hits = pygame.sprite.spritecollide(boss, spears, True)
                 for hit in hits:
-                    boss.hit()
+                    boss.hit()  # босс ранен
                     if boss.health <= 0:  # Проверяем здоровье босса после попадания
-                        level_complete = True
+                        level_complete = True  # уровень пройден
                         display_time = pygame.time.get_ticks()
                         boss.kill()  # Удаляем босса из всех групп спрайтов
                         level_1_completed = True  # Указываем, что первый уровень завершен
@@ -430,8 +430,8 @@ def main(font): # основная функция
                     screen.blit(text, text_rect)
                 else:
                     # Возвращение в главное меню после 5 секунд
-                    current_screen = "menu"
-                    in_game = False
+                    current_screen = "menu"  # меню
+                    in_game = False  # игра остановлена
                     level_complete = False  # Сброс флага завершения уровня для возможного повторного прохождения
 
         pygame.display.flip()
