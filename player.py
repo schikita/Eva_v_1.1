@@ -3,28 +3,30 @@ from spear import Spear
 
 screen_height = 800
 
-
+# класс отвечает за управление персонажем в игре, обновление его состояния и анимации в зависимости от действий игрока.
 class Player(pygame.sprite.Sprite):
-    def __init__(self, image_sheet, position, all_sprites_group, spears_group, screen_height):
+    def __init__(self, image_sheet, position, all_sprites_group, spears_group, screen_height): # Инициализируется конструктор класса Player с параметрами
+        super().__init__() # Вызывается конструктор родительского класса super().init() дважды.
         super().__init__()
-        super().__init__()
-        self.screen_height = screen_height
-        self.image_sheet = image_sheet
-        self.all_sprites = all_sprites_group
-        self.spears = spears_group
-        self.last_direction = "right"
-        self.state = "standing"
-        self.anim_index = 0
-        self.anim_timer = pygame.time.get_ticks()
-        self.velocity = 5
-        self.jump_speed = -15
-        self.gravity = 0.25
-        self.on_ground = True
-        self.y_velocity = 0
-        self.frame_rects = {  # Словарь теперь является атрибутом экземпляра
-            "standing": [(0, 0, 150, 150)],
-            "running_forward": [(150, 0, 150, 150), (300, 0, 150, 150)],
-            "running_backward": [(150, 150, 150, 150), (300, 150, 150, 150)],
+       
+      # Конструктор выполняет начальную настройку объекта Player, устанавливая все необходимые атрибуты для работы с игрой.
+        self.screen_height = screen_height 
+        self.image_sheet = image_sheet 
+        self.all_sprites = all_sprites_group 
+        self.spears = spears_group 
+        self.last_direction = "right" 
+        self.state = "standing" 
+        self.anim_index = 0 
+        self.anim_timer = pygame.time.get_ticks() 
+        self.velocity = 5 # Устанавливается значение атрибута
+        self.jump_speed = -15 # Устанавливается значение атрибута
+        self.gravity = 0.25 # Устанавливается значение атрибута
+        self.on_ground = True 
+        self.y_velocity = 0 
+        self.frame_rects = {  # Словарь теперь является атрибутом экземпляра #
+            "standing": [(0, 0, 150, 150)], #
+            "running_forward": [(150, 0, 150, 150), (300, 0, 150, 150)], #
+            "running_backward": [(150, 150, 150, 150), (300, 150, 150, 150)], #
             "backward_standing": [(0, 150, 150, 150)],
             "jumping_forward": [(0, 300, 150, 150)],
             "jumping_backward": [(0, 450, 150, 150)],
@@ -35,7 +37,8 @@ class Player(pygame.sprite.Sprite):
         }
         self.update_rect(position)
         self.health = 5  # Начальное количество жизней
-
+        
+     # создание словаря frame_rects, содержащего наборы координат для различных состояний анимации персонажа
     def update_rect(self, position):
         frame_rects = {
             "standing": (0, 0, 150, 150),
@@ -54,7 +57,9 @@ class Player(pygame.sprite.Sprite):
         self.image = self.image_sheet.subsurface(frame)
         self.rect = self.image.get_rect()
         self.rect.topleft = position
-
+        
+     # Метод update обрабатывает текущие нажатия клавиш и вызывает соответствующие методы для выполнения действий:
+     # движение влево/вправо, приседание, бросок копья, прыжок или стояние. Также применяет гравитацию к персонажу.
     def update(self, keys):
         current_time = pygame.time.get_ticks()
         if self.on_ground:
@@ -73,12 +78,15 @@ class Player(pygame.sprite.Sprite):
 
         self.apply_gravity()
 
+
+  #  Метод move перемещает персонажа на указанную скорость и обновляет состояние и анимацию.
     def move(self, velocity, state):
         self.rect.x += velocity
         self.state = state
         self.last_direction = "right" if velocity > 0 else "left"
         self.update_animation()
 
+    #  Методы crouch, stand и jump обновляют состояние персонажа для выполнения указанных действий.
     def crouch(self):
         self.state = "crouching_forward" if self.last_direction == "right" else "crouching_backward"
         self.update_animation()
@@ -95,6 +103,7 @@ class Player(pygame.sprite.Sprite):
             self.anim_index = 0  # Сброс анимации
             self.update_animation()
 
+     #  Метод apply_gravity добавляет гравитацию к вертикальной скорости персонажа, обновляет его позицию и проверяет, находится ли персонаж на земле.
     def apply_gravity(self):
         self.y_velocity += self.gravity
         self.rect.y += self.y_velocity
