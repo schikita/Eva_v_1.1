@@ -42,7 +42,7 @@ class Boss(pygame.sprite.Sprite):
             self.kill()  # Удаление босса при смерти
             self.show_level_complete()  # Показываем сообщение о завершении уровня
 
-    def show_level_complete(self):
+    def show_level_complete(self): # Функция show_level_complete отображает текст "Level complete" по центру экрана на протяжении 5 секунд
         font = pygame.font.Font(None, 74)
         text = font.render("Level complete", True, (255, 255, 255))
         text_rect = text.get_rect(center=(self.screen.get_width() // 2, self.screen.get_height() // 2))
@@ -50,8 +50,8 @@ class Boss(pygame.sprite.Sprite):
         pygame.display.flip()
         pygame.time.wait(5000)
         global current_screen, in_game
-        current_screen = "menu"
-        in_game = False
+        current_screen = # "menu"  Затем меняет текущий экран на "menu" 
+        in_game = False # игра окончена 
 
     def fire(self):
         # Запуск шарика в сторону игрока
